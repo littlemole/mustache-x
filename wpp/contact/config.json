@@ -1,0 +1,14 @@
+{
+    "mysql"  : "mysql://contacts:contact@mariadb/contacts",
+
+    "view"   : "/view/",
+    "htdocs" : "/htdocs/",
+
+    "http"  :
+    {
+        "ports"  : [ 3000 ],
+        "http2"  : false
+    }
+}
+
+ 

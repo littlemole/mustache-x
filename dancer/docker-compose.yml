@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: 
+      context: ./contacts
+      dockerfile: Dockerfile
+    ports:
+     - "3000:3000"
+  mariadb:
+    build: 
+      context: ./mariadb
+      dockerfile: Dockerfile
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1 
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10

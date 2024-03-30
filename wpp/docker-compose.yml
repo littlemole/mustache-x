@@ -1,0 +1,24 @@
+version: '2'
+services:
+  web:
+    build: 
+      context: ./contact
+      dockerfile: Dockerfile
+      args:
+        CXX: g++
+        EVENTLIB: libevent
+    ports:
+     - "3000:3000" 
+    depends_on:
+      mariadb:
+        condition: service_healthy          
+  mariadb:
+    build: 
+      context: ./mariadb
+      dockerfile: Dockerfile
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1 
+    healthcheck:
+      test: ["CMD", "mariadb-admin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10

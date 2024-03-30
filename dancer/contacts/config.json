@@ -1,0 +1,6 @@
+{
+    "dbi" : "dbi:MariaDB:dbname=contacts;host=mariadb",
+    "user" : "contacts",
+    "pwd" : "contact",
+    "template" : "Mustache"
+}
