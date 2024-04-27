@@ -7,7 +7,7 @@ in an effort to help bringing back the joy of web development.
 
 The example web app is a stripped down version of the web 1 server-side <b>Contacts</b> [webapp](https://hypermedia.systems/a-web-1-0-application/) introduced in the HTMX book [hypermedia.systems](https://hypermedia.systems/), covering the basic CRUD aspects of the Contacts app. The archiver part has been omitted, but we talk to a real database ( [mariadb](https://mariadb.com/) ).
 
-All example implementations cover the same functionality. Examples avail in Python, Perl, PHP (2), JavaScript, Java (2) and C++.
+All example implementations cover the same functionality. Examples avail in Python, Perl (2), PHP (2), JavaScript, Java (2) and C++.
 
 ## HTMX features covered
 
