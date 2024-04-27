@@ -46,6 +46,7 @@ sudo apt install docker-io docker-compose
 |----|---------|--------|----|--------|
 |flask|[Flask](https://flask.palletsprojects.com/)|[Python 3](https://www.python.org/)|[5000](http://localhost:5000/contacts)|[chevron](https://pypi.org/project/chevron/)|
 |dancer|[Dancer2](https://perldancer.org/)|[Perl 5](https://www.perl.org/)|[3000](http://localhost:3000/contacts)|[Template::Mustache](https://metacpan.org/dist/Template-Mustache)|
+|mod_perl2|[mod_perl](https://perl.apache.org/)|[Perl 5](https://www.perl.org/)|[3000](http://localhost:3000/contacts)|[Template::Mustache](https://metacpan.org/dist/Template-Mustache)|
 |symfony|[Symfony 6.4](https://symfony.com/)|[PHP 8.1](https://www.php.net/)|[8000](http://localhost:8000/contacts)|[mustache/mustache](https://packagist.org/packages/mustache/mustache)|
 |laravel|[Laravel 10](https://laravel.com/)|[PHP 8.1](https://www.php.net/)|[8000](http://localhost:8000/contacts)|[mustache/mustache](https://packagist.org/packages/mustache/mustache)|
 |node|[ExpressJs 4.19](http://expressjs.com/)|[NodeJs 20](https://nodejs.org/en)|[3000](http://localhost:3000/contacts)|[mustache](https://www.npmjs.com/package/mustache)|

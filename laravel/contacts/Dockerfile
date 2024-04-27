@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:22.04
 
 ENV TZ=Etc/UTC
 RUN DEBIAN_FRONTEND=noninteractive apt-get update

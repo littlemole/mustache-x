@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile
     ports:
      - "5000:5000"
+    depends_on:
+      mariadb:
+        condition: service_healthy          
   mariadb:
     build: 
       context: ./mariadb
@@ -13,6 +16,6 @@ services:
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1 
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mariadb-admin" ,"ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
