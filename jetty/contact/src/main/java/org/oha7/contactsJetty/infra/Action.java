@@ -1,4 +1,4 @@
-package org.oha7.contactsJetty;
+package org.oha7.contactsJetty.infra;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.jetty.http.HttpMethod;
+
 
 @Repeatable(Actions.class)
 @Retention(RetentionPolicy.RUNTIME)

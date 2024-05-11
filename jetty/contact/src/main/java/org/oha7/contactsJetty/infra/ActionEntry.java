@@ -1,4 +1,4 @@
-package org.oha7.contactsJetty;
+package org.oha7.contactsJetty.infra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,10 @@ import java.util.regex.Pattern;
 
 import org.eclipse.jetty.http.HttpMethod;
 
+
 public class ActionEntry {
     
-    public BaseAction action;
+    public Actionable action;
     public HttpMethod method;
     public Pattern pattern;
 
@@ -35,7 +36,7 @@ public class ActionEntry {
     
                     var actionEntry = new ActionEntry();
 
-                    actionEntry.action = (BaseAction)clazz.getDeclaredConstructor().newInstance();
+                    actionEntry.action = (Actionable)clazz.getDeclaredConstructor().newInstance();
                     actionEntry.method = method;
                     actionEntry.pattern = Pattern.compile(value);
     

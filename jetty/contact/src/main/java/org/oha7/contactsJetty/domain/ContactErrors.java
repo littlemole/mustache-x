@@ -1,4 +1,4 @@
-package org.oha7.contactsJetty.model;
+package org.oha7.contactsJetty.domain;
 
 public class ContactErrors {
 

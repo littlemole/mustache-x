@@ -1,16 +1,29 @@
-package org.oha7.contactsJetty;
+package org.oha7.contactsJetty.infra;
 
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+
 public class Scanner {
 
+	private static HashMap<String, ArrayList<String>> classNames = new HashMap<String,ArrayList<String>>();
+
     public static ArrayList<String> getClassNamesFromPackage(String packageName) throws IOException, java.net.URISyntaxException {
+
+		if(classNames.containsKey(packageName)) return classNames.get(packageName);
+
+		var classes = findClassNamesFromPackage(packageName);
+		classNames.put(packageName, classes);
+		return classes;
+    }
+
+    private static ArrayList<String> findClassNamesFromPackage(String packageName) throws IOException, java.net.URISyntaxException {
 
         ArrayList<String> result = new ArrayList<String>();
 
@@ -41,4 +54,5 @@ public class Scanner {
 
         return result;
     }
+
 }

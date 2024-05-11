@@ -4,19 +4,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import org.oha7.contactsJetty.Action;
-import org.oha7.contactsJetty.BaseAction;
-import org.oha7.contactsJetty.model.Contact;
-import org.oha7.contactsJetty.ContactsRepository;
-import org.oha7.contactsJetty.viewModel.ContactsViewModel;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.oha7.contactsJetty.domain.Contact;
+import org.oha7.contactsJetty.domain.ContactsRepository;
+import org.oha7.contactsJetty.infra.Action;
+import org.oha7.contactsJetty.infra.Actionable;
+import org.oha7.contactsJetty.viewModel.ContactsViewModel;
+
+
 @Action("^/$")
 @Action("^$")
-public class ContactsAction implements BaseAction {
-    
+public class ContactsAction implements Actionable {
+
     public ContactsAction() {}
 
     public void execute(Matcher matcher, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -34,10 +35,12 @@ public class ContactsAction implements BaseAction {
             contacts = ContactsRepository.searchContacts(search);
         }
 
-        var scopes = new ContactsViewModel(
+        var viewModel = new ContactsViewModel(
             contacts,
             search
-        );
-        render(response,"templates/index.tpl", scopes);
+       );
+
+	   view(request,"templates/index.tpl")
+	   		.render(response, viewModel);
     }
 }

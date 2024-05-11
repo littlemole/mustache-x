@@ -1,8 +1,10 @@
-package org.oha7.contactsJetty.model;
+package org.oha7.contactsJetty.domain;
 
-import org.oha7.contactsJetty.ContactsRepository;
-
+import java.util.Locale;
 import jakarta.servlet.http.HttpServletRequest;
+
+import org.oha7.contactsJetty.infra.I18N;
+
 
 public class Contact {
 
@@ -46,23 +48,23 @@ public class Contact {
         this.phone = phone;
     }
 
-    public static ContactErrors validateContact(Contact contact)
+    public static ContactErrors validateContact(Locale locale,Contact contact)
     {
         var errors = new ContactErrors();
 
         if(contact.email.isBlank())
         {
-            errors.email = "Email must not be empty.";
+            errors.email = I18N.getKey(locale, "contact.error.email.empty");
         }
         if(contact.last.isBlank())
         {
-            errors.last = "Last Name must not be empty.";
+            errors.last = I18N.getKey(locale, "contact.error.last.empty");
         }
 
         var existing = ContactsRepository.getContactByEmail(contact.email);
         if(existing != null && existing.id != contact.id)
         {
-            errors.email = "Email must be unique.";
+            errors.email = I18N.getKey(locale, "contact.error.email.unique");
         }
         
         return errors;

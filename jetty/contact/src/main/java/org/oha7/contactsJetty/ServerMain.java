@@ -9,6 +9,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.resource.URLResourceFactory;
 
+import org.oha7.contactsJetty.infra.I18N;
+
 public class ServerMain
 {
     public static void main(String[] args) throws Throwable
@@ -25,6 +27,8 @@ public class ServerMain
 
     public void run() throws Exception
     {
+		I18N.languages_avail = new String[] { "en", "de" };
+
         Server server = new Server(8000);
 
         URL webRootLocation = this.getClass().getResource("/webapp/index.html");
@@ -44,8 +48,8 @@ public class ServerMain
 
         contextHandler.getMimeTypes().addMimeMapping("txt", "text/plain;charset=utf-8");
 
-        contextHandler.addServlet(ContactsServlet.class, "/contacts/*");
-        contextHandler.addServlet(ContactsServlet.class, "/contacts");
+        contextHandler.addServlet(FrontControllerServlet.class, "/contacts/*");
+        contextHandler.addServlet(FrontControllerServlet.class, "/contacts");
         contextHandler.addServlet(DefaultServlet.class, "/");
 
         server.setHandler(contextHandler);

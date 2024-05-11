@@ -2,19 +2,21 @@
 <!doctype html>
 <html lang="">
 <meta charset="utf-8">
-<head>
-    <title>Contact App</title>    
-    <link rel="stylesheet" href="https://the.missing.style/v0.2.0/missing.min.css">
-    <link rel="stylesheet" href="/site.css">
-    <script src="/js/htmx-1.8.0.js"></script>
-    <script src="/js/rsjs-menu.js" type="module"></script>
-</head>
-<body >
+{{>header.tpl}}
+
+<body>
 <main>
     <header>
+	    <p style="width:100%;text-align:right">
+		{{#languages}}
+			{{#active}}<b>{{/active}}
+			<a href="/contacts/{{contact.id}}?lang={{locale}}">{{locale}}</a>
+			{{#active}}</b>{{/active}}
+		{{/languages}}
+		</p>
         <h1>
-            <all-caps>contacts.app</all-caps>
-            <sub-title>A Demo Contacts Application</sub-title>
+            <all-caps>{{#i18n}}title{{/i18n}}</all-caps>
+            <sub-title>{{#i18n}}subtitle{{/i18n}}</sub-title>
         </h1>
     </header>
 
@@ -26,8 +28,8 @@
 </div>
 
 <p>
-    <a href="/contacts/{{contact.id}}/edit">Edit</a>
-    <a href="/contacts">Back</a>
+    <a href="/contacts/{{contact.id}}/edit">{{#i18n}}contact.edit{{/i18n}}</a>
+    <a href="/contacts">{{#i18n}}contact.back{{/i18n}}</a>
 </p>
 
 </main>

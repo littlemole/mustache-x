@@ -1,16 +1,15 @@
-package org.oha7.contactsJetty;
+package org.oha7.contactsJetty.domain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.oha7.contactsJetty.model.Contact;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 
 public class ContactsRepository {
 

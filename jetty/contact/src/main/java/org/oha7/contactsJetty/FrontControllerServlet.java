@@ -3,13 +3,16 @@ package org.oha7.contactsJetty;
 import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
-import org.eclipse.jetty.http.HttpMethod;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ContactsServlet extends HttpServlet {
+import org.eclipse.jetty.http.HttpMethod;
+import org.oha7.contactsJetty.infra.ActionEntry;
+
+
+public class FrontControllerServlet extends HttpServlet {
 
     private static List<ActionEntry> actions = ActionEntry.fromClasspath("org.oha7.contactsJetty.actions");
 

@@ -2,18 +2,21 @@ package org.oha7.contactsJetty.actions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.regex.Matcher;
-
-import org.oha7.contactsJetty.Action;
-import org.oha7.contactsJetty.BaseAction;
-import org.oha7.contactsJetty.model.Contact;
-import org.oha7.contactsJetty.ContactsRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.oha7.contactsJetty.domain.Contact;
+import org.oha7.contactsJetty.domain.ContactsRepository;
+import org.oha7.contactsJetty.infra.Action;
+import org.oha7.contactsJetty.infra.Actionable;
+import org.oha7.contactsJetty.infra.I18N;
+
+
 @Action(value = "^/([^/]*)/email$")
-public class CheckEmailContactAction implements BaseAction {
+public class CheckEmailContactAction implements Actionable {
     
     public void execute(Matcher matcher, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -22,12 +25,12 @@ public class CheckEmailContactAction implements BaseAction {
 
         Contact contact = ContactsRepository.getContactByEmail(email);
 
-        PrintWriter writer = response.getWriter();
+		String result = "";
+        if(contact != null && contact.id != Long.valueOf(id)) {
 
-        if(contact != null && contact.id != Long.valueOf(id))
-        {
-            writer.println( "Email already taken!" );     
+			Locale locale = getLocale(request);
+            result = I18N.getKey(locale, "contact.error.email.taken");			
         }
-        writer.flush();
+		render(response,result);
     }
 }

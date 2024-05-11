@@ -1,9 +1,9 @@
 package org.oha7.contactsJetty.viewModel;
 
-import org.oha7.contactsJetty.model.Contact;
-import org.oha7.contactsJetty.model.ContactErrors;
+import org.oha7.contactsJetty.domain.Contact;
+import org.oha7.contactsJetty.domain.ContactErrors;
 
-public class ContactViewModel {
+public class ContactViewModel extends I18nViewModel{
  
     public Contact contact;
     public ContactErrors errors;

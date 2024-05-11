@@ -3,18 +3,19 @@ package org.oha7.contactsJetty.actions;
 import java.io.IOException;
 import java.util.regex.Matcher;
 
-import org.oha7.contactsJetty.Action;
-import org.oha7.contactsJetty.BaseAction;
-import org.oha7.contactsJetty.model.Contact;
-import org.oha7.contactsJetty.ContactsRepository;
-import org.oha7.contactsJetty.model.ContactErrors;
-import org.oha7.contactsJetty.viewModel.ContactViewModel;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.oha7.contactsJetty.domain.Contact;
+import org.oha7.contactsJetty.domain.ContactErrors;
+import org.oha7.contactsJetty.domain.ContactsRepository;
+import org.oha7.contactsJetty.infra.Action;
+import org.oha7.contactsJetty.infra.Actionable;
+import org.oha7.contactsJetty.viewModel.ContactViewModel;
+
+
 @Action("^/([0-9]*)$")
-public class ShowContactAction implements BaseAction {
+public class ShowContactAction implements Actionable {
     
     public ShowContactAction() {}
 
@@ -25,8 +26,9 @@ public class ShowContactAction implements BaseAction {
         Contact contact = ContactsRepository.getContact(Long.valueOf(id));
         ContactErrors errors = new ContactErrors();
 
-        var scopes = new ContactViewModel(contact, errors);
+        var viewModel = new ContactViewModel(contact, errors);
 
-        render(response,"templates/show.tpl", scopes);
+		view(request,"templates/show.tpl")
+			.render(response, viewModel);
     }
 }
