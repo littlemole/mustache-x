@@ -24,8 +24,7 @@ public class Query implements AutoCloseable {
 
 	private int params = 1;
 
-	public Query(){
-
+	public Query() {
 	}
 
 	public Query prepare(String sql) throws SQLException {
