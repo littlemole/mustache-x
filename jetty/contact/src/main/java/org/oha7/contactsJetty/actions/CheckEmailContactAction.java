@@ -26,7 +26,7 @@ public class CheckEmailContactAction implements Actionable {
         Contact contact = ContactsRepository.getContactByEmail(email);
 
 		String result = "";
-        if(contact != null && contact.id != Long.valueOf(id)) {
+        if(contact != null && contact.id != Integer.valueOf(id)) {
 
 			Locale locale = getLocale(request);
             result = I18N.getKey(locale, "contact.error.email.taken");			

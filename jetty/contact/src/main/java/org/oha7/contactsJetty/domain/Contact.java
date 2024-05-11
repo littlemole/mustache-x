@@ -8,7 +8,7 @@ import org.oha7.contactsJetty.infra.I18N;
 
 public class Contact {
 
-    public Long id;
+    public Integer id;
     public String email;
     public String first;
     public String last;
@@ -27,7 +27,7 @@ public class Contact {
         return id == null ? "" : String.valueOf(id);
     }
 
-    public void setId(Long id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }

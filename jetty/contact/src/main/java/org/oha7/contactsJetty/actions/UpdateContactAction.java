@@ -26,7 +26,7 @@ public class UpdateContactAction implements Actionable {
 		Locale locale = getLocale(request);
 
         Contact contact = Contact.fromRequest(request);
-        contact.id = Long.valueOf(id);
+        contact.id = Integer.valueOf(id);
 
         ContactErrors errors = Contact.validateContact(locale,contact);
 
