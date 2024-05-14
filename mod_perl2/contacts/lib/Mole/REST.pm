@@ -116,8 +116,9 @@ sub fetch_cookies {
 	my $r = shift;
 	my %cookies = Apache2::Cookie->fetch($r);
 
-	foreach my $cookie ( keys %cookies ) {
-		$cookie->value( Encode::decode_utf( $cookie->value()) );
+	foreach my $key ( keys %cookies ) {
+		my $cookie = $cookies{$key};
+		$cookie->value( Encode::decode_utf8( $cookie->value()) );
 	}
 	return \%cookies;
 }
@@ -137,6 +138,70 @@ sub redirect {
 	}
   
     return $s;
+}
+
+sub fetch_locale_from_query {
+	my $r = shift;
+	my $param_name = shift || "lang";
+
+	my $params = params($r);
+	if( exists $params->{$param_name} ) {
+
+		my $lang = $params->{$param_name};
+		if( $lang =~ /^[a-zA-Z][a-zA-Z](_[a-zA-Z][a-zA-Z])?$/ ) {
+			return $lang;
+		}
+	}
+	return undef;
+}
+
+sub fetch_locale_from_cookie {
+	my $r = shift;
+	my $cookie_name = shift || "language";
+
+	my $cookies = Mole::REST::fetch_cookies($r);
+	if( exists $cookies->{$cookie_name} ) {
+
+		my $lang = $cookies->{$cookie_name}->value();
+		if( $lang =~ /^[a-zA-Z][a-zA-Z](_[a-zA-Z][a-zA-Z])?$/ ) {
+			return $lang;
+		}
+	}
+	return undef;
+}
+
+sub fetch_locale_from_headers {
+	my $r = shift;
+
+	my $headers = $r->headers_in();
+    my $lang = $headers->{"Accept-Language"};
+	$lang =~ s/[,;].*$//;
+	if( $lang =~ /^[a-zA-Z][a-zA-Z](_[a-zA-Z][a-zA-Z])?$/ ) {
+		return $lang;
+	}
+	return undef;
+}
+
+sub fetch_locale {
+
+	my $r = shift;
+
+	my $result = fetch_locale_from_query($r);
+	if(defined $result) {
+		return $result;
+	}
+
+	$result = fetch_locale_from_cookie($r);
+	if(defined $result) {
+		return $result;
+	}
+
+	$result = fetch_locale_from_headers($r);
+	if(defined $result) {
+		return $result;
+	}
+	
+	return "en";
 }
 
 ###############################################

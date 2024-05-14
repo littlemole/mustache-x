@@ -16,10 +16,14 @@ use warnings;
 
 sub new {
     my $class = shift;
-    my $self = {};
-
-    $self->{id} = undef;
-    $self->{errors} = undef;
+    my $self = {
+		id     => undef,
+		email  => undef,
+		first  => undef,
+		last   => undef,
+		phone  => undef,
+		errors => undef
+	};
 
     if(@_ == 5)
     {
@@ -29,7 +33,7 @@ sub new {
     {
         $self->{email} = shift;
         $self->{first} = shift;
-        $self->{last} = shift;
+        $self->{last}  = shift;
         $self->{phone} = shift;
     }
 

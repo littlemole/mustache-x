@@ -32,19 +32,19 @@ my %attrs;
 # this will be called at compile time
 sub MODIFY_CODE_ATTRIBUTES {
 
-  my ($package, $subref, @attrs) = @_;
+	my ($package, $subref, @attrs) = @_;
 
 	if ( !defined $package ) {
 		return 0;
 	}
 
-  $attrs{ refaddr $subref } = \@attrs;
+  	$attrs{ refaddr $subref } = \@attrs;
 
-  foreach my $a ( @attrs ) {
+  	foreach my $a ( @attrs ) {
 		register_attribute($package,$subref,$a);
 	}
 
-  my @bad;
+  	my @bad;
 	return @bad;
 }
 

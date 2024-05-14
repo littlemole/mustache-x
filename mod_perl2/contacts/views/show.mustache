@@ -1,33 +1,33 @@
 
 <!doctype html>
 <html lang="">
-<head>
-<meta charset="utf-8">
-    <title>Contact App</title>    
-    <link rel="stylesheet" href="https://the.missing.style/v0.2.0/missing.min.css">
-    <link rel="stylesheet" href="/contacts/static/site.css">
-    <script src="/contacts/static/js/htmx-1.8.0.js"></script>
-    <script src="/contacts/static/js/rsjs-menu.js" type="module"></script>
-</head>
+{{>header}}
 <body >
 <main>
     <header>
+	    <p style="width:100%;text-align:right">
+		{{#languages}}
+			{{#active}}<b>{{/active}}
+			<a href="/contacts/?lang={{locale}}">{{locale}}</a>
+			{{#active}}</b>{{/active}}
+		{{/languages}}
+		</p>
         <h1>
-            <all-caps>contacts.app</all-caps>
-            <sub-title>A Demo Contacts Application</sub-title>
+            <all-caps>{{#i18n}}title{{/i18n}}</all-caps>
+            <sub-title>{{#i18n}}subtitle{{/i18n}}</sub-title>
         </h1>
     </header>
 
 <h1>{{contact.first}} {{contact.last}}</h1>
 
 <div>
-    <div>Phone: {{contact.phone}}</div>
-    <div>Email: {{contact.email}}</div>
+    <div>{{#i18n}}contact.phone{{/i18n}}: {{contact.phone}}</div>
+    <div>{{#i18n}}contact.email{{/i18n}}: {{contact.email}}</div>
 </div>
 
 <p>
-    <a href="/contacts/{{contact.id}}/edit">Edit</a>
-    <a href="/contacts">Back</a>
+    <a href="/contacts/{{contact.id}}/edit">{{#i18n}}contact.edit{{/i18n}}</a>
+    <a href="/contacts">{{#i18n}}contact.back{{/i18n}}</a>
 </p>
 
 </main>

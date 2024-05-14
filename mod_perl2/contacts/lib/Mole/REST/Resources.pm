@@ -25,7 +25,7 @@ sub register {
   my $path = shift;
   my $code = shift;
   
-  print STDERR "REGISTER $method $path";
+  print STDERR "REGISTER $method $path\r\n";
 
   if (!exists $lookup{$method}) {
     die("unknown method\n");

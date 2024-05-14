@@ -13,6 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN curl -L https://cpanmin.us | perl - -- Template::Mustache
 RUN curl -L https://cpanmin.us | perl - -- DBD::MariaDB
 RUN curl -L https://cpanmin.us | perl - -- JSON
+RUN curl -L https://cpanmin.us | perl - -- Config::Properties
 
 ADD docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD docker/ports.conf /etc/apache2/ports.conf
