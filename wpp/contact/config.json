@@ -4,6 +4,11 @@
     "view"   : "/view/",
     "htdocs" : "/htdocs/",
 
+	"i18n"   : {
+        "path"    : "/locale/properties", 
+        "locales" : ["en", "de"]
+    },
+
     "http"  :
     {
         "ports"  : [ 3000 ],

@@ -14,12 +14,12 @@ using namespace reproweb;
 using namespace repro;
 using namespace prio;
 
-class View : public MustacheView
+class View 
 {
 public:
 
 	View( std::shared_ptr<AppConfig> conf, std::shared_ptr<TplStore> tpls)
-		: MustacheView(tpls)
+		: templates_(tpls)
 	{
 		version_ = conf->getString("version");
 	}
@@ -69,14 +69,87 @@ public:
 
 	void redirect_to_index(Request& req, Response& res)
 	{
-		redirect( req, res, "/contacts" );
+		res.redirect(req, "/contacts").flush();
 	}
 
 
 private:
 
-	std::string version_;
+    void render(Request& req, Response& res, const std::string&tpl, Json::Value data) 
+	{
+		std::string locale = get_locale(req);
+		std::string short_locale = get_short_locale(locale);
 
+		std::vector<std::string> avail_locales{ "en","de" };
+		Json::Value langs(Json::arrayValue);
+		for(auto& it : avail_locales)
+		{
+			Json::Value l(Json::objectValue);
+			l["locale"] = it;
+			l["active"] = it == short_locale ? true : false;
+			langs.append(l);
+		}
+		data["languages"] = langs;
+
+		std::string content = templates_->render(tpl,locale,data);
+
+		Cookie cookie("language",locale);
+		cookie.path("/");
+
+		res
+			.ok()
+			.cookie(cookie)
+			.body(content)
+			.flush();
+	}
+
+	std::string get_short_locale(const std::string& locale)
+	{
+		if(locale.size() == 2) return locale;
+		auto v = prio::split(locale,"_");
+		if(v.size()>1)
+		{
+			if(v[0].size() == 2) return v[0];
+		}
+		return "en";
+	}
+
+	std::string get_locale(Request& req)
+	{
+		auto qp = req.path.queryParams();
+		if(qp.exists("lang"))
+		{
+			std::string lang = qp.get("lang");
+			if(!lang.empty())
+			{
+				std::regex rgx("^[a-zA-Z][a-zA-Z](_[a-zA-Z][a-zA-Z])?$");
+				if(std::regex_match(lang,rgx))
+				{
+					return lang;
+				}
+			}
+		}
+		auto cookies = req.headers.cookies();
+		if(cookies.exists("language"))
+		{
+			auto cookie = cookies.get("language");
+			{
+				std::string lang = cookie.value();
+				if(!lang.empty())
+				{
+					std::regex rgx("^[a-zA-Z][a-zA-Z](_[a-zA-Z][a-zA-Z])?$");
+					if(std::regex_match(lang,rgx))
+					{
+						return lang;
+					}
+				}
+			}
+		}
+		return req.locale();
+	}
+
+	std::string version_;
+	std::shared_ptr<TplStore> templates_;
 
 };
  

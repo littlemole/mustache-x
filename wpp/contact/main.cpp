@@ -31,12 +31,7 @@ int main(int /*argc*/, char** /*argv*/ )
 		GET  ( "/contacts/{id}/email",	&Controller::email),
 		DEL  ( "/contacts/{id}",		&Controller::remove),
 		GET  ( "/contacts/{id}",		&Controller::show),
-/*		GET  ( "/logout",		&Controller::logout),
-		GET  ( "/login",		&Controller::show_login),
-		GET  ( "/register",		&Controller::show_registration),
-		POST ( "/login",		&Controller::login),
-		POST ( "/register",		&Controller::register_user),
-*/
+
 		singleton<AppConfig()>(),
 		singleton<ContactPool(AppConfig)>(),
 

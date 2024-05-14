@@ -195,7 +195,7 @@ public:
 		}
 
 		Contact existing = co_await repository->find_contact_by_email(contact.email());
-		if(existing.id() != id) 
+		if(!existing.id().empty() && existing.id() != id) 
 		{
 			valid = false;
 			errors["email"] = "Email must be unique!";

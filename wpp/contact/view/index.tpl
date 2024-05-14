@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="">
-<head>
-    <meta charset="utf-8">
-    <title>Contact App</title>    
-    <link rel="stylesheet" href="https://the.missing.style/v0.2.0/missing.min.css">
-    <link rel="stylesheet" href="/site.css">
-    <script src="/js/htmx-1.8.0.js"></script>
-    <script src="/js/rsjs-menu.js" type="module"></script>
-</head>
+{{>header}}
 <body >
 <main>
     <header>
+	    <p style="width:100%;text-align:right">
+		{{#languages}}
+			{{#active}}<b>{{/active}}
+			<a href="/contacts?lang={{locale}}">{{locale}}</a>
+			{{#active}}</b>{{/active}}
+		{{/languages}}
+		</p>
         <h1>
-            <all-caps>contacts.app</all-caps>
-            <sub-title>A Demo Contacts Application</sub-title>
+            <all-caps>{{#i18n}}title{{/i18n}}</all-caps>
+            <sub-title>{{#i18n}}subtitle{{/i18n}}</sub-title>
         </h1>
     </header>
 
     <form action="/contacts" method="get" class="tool-bar">
-        <label for="search">Search Term</label>
+        <label for="search">{{#i18n}}search.term{{/i18n}}</label>
         <input id="search" type="search" name="q" value="{{q}}"
                hx-get="/contacts"
                hx-trigger="search, keyup delay:200ms changed"
@@ -27,17 +27,17 @@
                hx-swap="outerHTML"
                hx-push-url="true"
                hx-indicator="#spinner"/>
-        <img style="height: 20px" id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
-        <input type="submit" value="Search"/>
+        <img style="height: 20px" id="spinner" class="htmx-indicator" src="/img/spinning-circles.svg"/>
+        <input type="submit" value="{{#i18n}}search.button{{/i18n}}"/>
     </form>
 
     <table>
         <thead>
         <tr>
-            <th>First</th>
-            <th>Last</th>
-            <th>Phone</th>
-            <th>Email</th>
+            <th>{{#i18n}}contact.first{{/i18n}}</th>
+            <th>{{#i18n}}contact.last{{/i18n}}</th>
+            <th>{{#i18n}}contact.phone{{/i18n}}</th>
+            <th>{{#i18n}}contact.email{{/i18n}}</th>
             <th></th>
         </tr>
         </thead>
@@ -52,16 +52,16 @@
                     <div data-overflow-menu>
                         <button type="button" aria-haspopup="menu"
                             aria-controls="contact-menu-{{ id }}"
-                            >Options</button>
+                            >{{#i18n}}contact.options{{/i18n}}</button>
                         <div role="menu" hidden id="contact-menu-{{ id }}">
-                            <a role="menuitem" href="/contacts/{{ id }}/edit">Edit</a>
-                            <a role="menuitem" href="/contacts/{{ id }}">View</a>
+                            <a role="menuitem" href="/contacts/{{ id }}/edit">{{#i18n}}contact.options.edit{{/i18n}}</a>
+                            <a role="menuitem" href="/contacts/{{ id }}">{{#i18n}}contact.options.view{{/i18n}}</a>
                             <a role="menuitem" href="#"
                                 hx-delete="/contacts/{{ id }}"
                                 hx-select="#contacts"
-                                hx-confirm="Are you sure you want to delete this contact?"
+                                hx-confirm="{{#i18n}}contact.confirm.delete{{/i18n}}"
                                 hx-swap="outerHTML swap:1s"
-                                hx-target="closest tr">Delete</a>
+                                hx-target="closest tr">{{#i18n}}contact.options.delete{{/i18n}}</a>
                         </div>
                     </div>
                 </td>
@@ -70,11 +70,11 @@
         </tbody>
     </table>
     <p >
-        <a href="/contacts/new">Add Contact</a> (
+        <a href="/contacts/new">{{#i18n}}contact.add{{/i18n}}</a> (
         <span hx-get="/contacts/count" hx-trigger="revealed, recountEvent from:body">
-          <img id="spinner" style="height: 20px"  class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+          <img id="spinner" style="height: 20px"  class="htmx-indicator" src="/img/spinning-circles.svg"/>
         </span>
-        ) total Contacts.
+        ) {{#i18n}}contact.total{{/i18n}}
     </p>
 
 </main>
