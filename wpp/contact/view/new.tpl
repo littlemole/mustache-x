@@ -4,21 +4,10 @@
 {{>header}}
 <body>
 <main>
-    <header>
-	    <p style="width:100%;text-align:right">
-		{{#languages}}
-			{{#active}}<b>{{/active}}
-			<a href="/contacts/new?lang={{locale}}">{{locale}}</a>
-			{{#active}}</b>{{/active}}
-		{{/languages}}
-		</p>
-        <h1>
-            <all-caps>{{#i18n}}title{{/i18n}}</all-caps>
-            <sub-title>{{#i18n}}subtitle{{/i18n}}</sub-title>
-        </h1>
-    </header>
 
-<form action="/contacts/new" method="post">
+  {{>title}}
+
+  <form action="/contacts/new" method="post">
     <fieldset>
         <legend>{{#i18n}}contact.values{{/i18n}}</legend>
 

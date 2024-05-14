@@ -31,6 +31,7 @@ public:
 		Json::Value json = Json::Value(Json::objectValue);
 		json["contacts"] = meta::toJson(contacts);
 		json["q"] = search;
+		json["base_url"] = "/contacts";
 
 		render(req,res,"index",json);
 	}
@@ -45,6 +46,7 @@ public:
 		Json::Value json = Json::Value(Json::objectValue);
 		json["contact"] = meta::toJson(contact);
 		json["errors"] = Json::Value(Json::objectValue);
+		json["base_url"] = std::string("/contacts/") + contact.id();
 
 		render(req,res,"show",json);
 	}
@@ -54,6 +56,7 @@ public:
 		Json::Value json = Json::Value(Json::objectValue);
 		json["contact"] = meta::toJson(contact);
 		json["errors"] = errors;
+		json["base_url"] = "/contacts/new";
 
 		render(req,res,"new",json);
 	}
@@ -63,6 +66,8 @@ public:
 		Json::Value json = Json::Value(Json::objectValue);
 		json["contact"] = meta::toJson(contact);
 		json["errors"] = errors;
+		json["base_url"] = std::string("/contacts/") + contact.id() + std::string("/edit");
+
 
 		render(req,res,"edit",json);
 	}

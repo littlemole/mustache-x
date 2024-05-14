@@ -4,19 +4,7 @@
 {{>header}}
 <body >
 <main>
-    <header>
-	    <p style="width:100%;text-align:right">
-		{{#languages}}
-			{{#active}}<b>{{/active}}
-			<a href="/contacts/{{contact.id}}/edit?lang={{locale}}">{{locale}}</a>
-			{{#active}}</b>{{/active}}
-		{{/languages}}
-		</p>
-        <h1>
-            <all-caps>{{#i18n}}title{{/i18n}}</all-caps>
-            <sub-title>{{#i18n}}subtitle{{/i18n}}</sub-title>
-        </h1>
-    </header>
+	{{>title}}
 
     <form action="/contacts/{{ contact.id }}/edit" method="post">
         <fieldset>
